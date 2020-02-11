@@ -1,6 +1,53 @@
+const fs = require('fs');
+var text = fs.readFileSync('users.json', 'utf-8');
+var profiles = JSON.parse(text);
+console.log(profiles.length);
+console.log(profiles);
+// console.log(profiles[0]);
+let user = {
+  name: 'Jesse Farmer',
+  email: 'jesse@20bits.com',
+  gender: 'M',
+  location: 'San Francisco, CA',
+  birthYear: 1983,
+}
+//console.log(profiles);
+// let everyUser = [
+//   user1,
+//   user2,
+//   user3,
+//   user4,
+//   user5,
+// ];
+/*
+Use JSON.stringify to turn a JavaScript objects into a string that you can write to a file
+Use JSON.parse to turn a JSON string into the corresponding JavaScript object
+*/
+function filter(array, checkFn) {
+  let results = [];
+  for (let item of array) {
+    if (checkFn(item)) {
+      results.push(item);
+    }
+  }
+  return results;
+}
+function isMale(user) {
+  return user.gender === 'M';
+}
+function age(user) {
+  let age = 2020 - user.birthYear;
+  return age === userAgePreference
+}
+
+// These three all do the same thing.
+ let allMen = filter(profiles, isMale);
+ console.log(`there are ${allMen.length} matches`);
+
+
 let readlineSync = require('readline-sync');
 let allUsers = [];
-let user = {}
+// let user = {}
 
 function runningApp() {
   let answer = readlineSync.question('Would you like to find your soulmate? (Yes or No) ')
@@ -37,7 +84,9 @@ function newUser() {
     console.log('Okay, let us start over... ');
     newUser();
   }
+}
 
+  function checkPreferences() {
   let preferences = {
     Gender: preferenceGender(['Male', 'Female', 'No preference']),
     Age: preferenceAge(['18-23', '24-28', '29-33', '34-38','39-45', '46-55','>55']),
@@ -57,12 +106,6 @@ let answerTwo = readlineSync.question('Are your preferences right? (Yes or No) '
     console.log(`We are all set ${user.firstName}!`);
     // console.log('We found' + matches + 'matches for you! So exciting!!! So many fun adventures ahead!');
   }
-  // else {
-  //   let preferenceStatus = readlineSync.question('What is wrong? Gender (g), age (a), or eye color (e)? ')
-  //     if (preferenceStatus === 'g') {
-  //       let choice = readlineSync.question('What gender do you dream your soulmate to have? ')
-  //   }
-  // }
 }
 
 function characteristicGender(gender) {
@@ -74,13 +117,13 @@ function characteristicGender(gender) {
   return gender[choice - 1];
 }
 
- function characteristicAge(age){
+function characteristicAge(age){
   for (let i = 0; i < age.length; i += 1) {
     console.log(`[${i + 1}] ${age[i]}`);
   }
   let choice = readlineSync.question('How old are you? ')
   console.log();
-  return age[choice -1];
+  return age[choice - 1];
 }
 
 function characteristicEyecolor(eyecolor){
@@ -118,14 +161,18 @@ function preferenceEyecolor(eyecolor){
   return eyecolor[choice -1];
 }
 
-    function isGender(user, preferenceGender) {
-      return user.gender === preferenceGender;
-    }
-    function isAge(user, preferenceAge) {
-      return user.Age === preferenceAge;
-    }
-    function isEyecolor(user, preferenceEyecolor){
-      return user.Eyecolor === preferenceEyecolor
-    }
+function isGender(user, preferenceGender) {
+  return user.gender === preferenceGender;
+}
 
-console.log(runningApp());
+function isAge(user, preferenceAge) {
+  return user.Age === preferenceAge;
+}
+
+function isEyecolor(user, preferenceEyecolor){
+  return user.Eyecolor === preferenceEyecolor
+}
+
+// console.log(runningApp());
+let finalFilter = profiles.filter(isGender(isAge(isEyecolor())));
+console.log(finalFilter)

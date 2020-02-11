@@ -2,6 +2,7 @@ const fs = require('fs');
 var text = fs.readFileSync('users.json', 'utf-8');
 var profiles = JSON.parse(text);
 console.log(profiles.length);
+console.log(profiles);
 // console.log(profiles[0]);
 let user = {
   name: 'Jesse Farmer',
