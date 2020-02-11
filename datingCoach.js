@@ -113,10 +113,8 @@ let user = {
 
       }
     }
-
     return results;
   }
-
 
   function isAge(user) {
     if(preferences.Age === 18-23){
@@ -141,18 +139,12 @@ let user = {
       return (55 < user.Age <= 130);
     }
     return false;
-
-
   }
 
   function matchesQuery(preferences, profile) {
-
     if(preferences.Gender === profile.gender && preferences.Eyecolor === profile.Eyecolor){
       return true;
-
     }
-
-
   }
   console.log(preferences.Age)
   function isEyeColor(user) {
@@ -160,12 +152,6 @@ let user = {
     return user.Eyecolor === preferences.Eyecolor;
   }
 
-  //let allGender = filter(profiles,isGender);
-  //let allAge = filter(profiles,isAge);
-  //console.log(allAge);
-  // let allEyes = filter(profiles, isEyeColor);
-  // let allGender = filter(allEyes,isGender);
-  // console.log(allGender);
   function isProfileAMatch(profile){
     return matchesQuery(preferences,profile);
   }
